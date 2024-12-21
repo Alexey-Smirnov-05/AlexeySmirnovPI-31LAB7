@@ -1,8 +1,10 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
-public class Playlist implements Cloneable {
+public class Playlist implements Cloneable, Playable {
     protected List<Track> tracks; // protected для доступа из производных классов
     protected int currentTrack;
     private static int instanceCount = 0;
@@ -107,11 +109,29 @@ public class Playlist implements Cloneable {
         }
     }
 
-    public void playSong() {
+    @Override
+    public void play() {
         if (!tracks.isEmpty()) {
             System.out.println("Сейчас играет: " + tracks.get(currentTrack).getTitle());
         } else {
             System.out.println("Плейлист пуст.");
         }
+    }
+
+    public int findTrack(String title) {
+        for (int i = 0; i < tracks.size(); i++) {
+            if (tracks.get(i).getTitle().equals(title)) {
+                return i;
+            }
+        }
+        return -1; // Если не найдено
+    }
+    public void shuffleTracks() {
+        long seed = System.nanoTime();
+        Collections.shuffle(tracks, new Random(seed));
+    }
+
+    public String getTitle() {
+        return "Base Playlist";
     }
 }
