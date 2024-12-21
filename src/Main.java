@@ -23,6 +23,8 @@ public class Main {
             System.out.println("8. Выход");
             System.out.println("9. Переименовать плейлист");
             System.out.println("10. Воспроизвести конкретный трек");
+            System.out.println("11. Поиск трека");
+            System.out.println("12. Перемешать треки");
             System.out.print("Действие: ");
             choice = scanner.nextInt();
             scanner.nextLine(); // Очищаем буфер ввода
@@ -46,7 +48,7 @@ public class Main {
                 }
                 case 2: {
                     if (playlist.getTotalNumberOfTracks() > 0) {
-                        playlist.playSong(); // Вызов переопределенной виртуальной функции
+                        playlist.play(); // Вызов переопределенной виртуальной функции
                     } else {
                         System.out.println("Нет треков в плейлисте");
                     }
@@ -116,6 +118,22 @@ public class Main {
                     System.out.print("Введите индекс трека для воспроизведения: ");
                     index = scanner.nextInt();
                     playlist.playSpecificSong(index - 1);
+                    break;
+                }
+                case 11: {
+                    System.out.print("Введите название трека для поиска: ");
+                    String trackTitle = scanner.nextLine();
+                    int index = playlist.findTrack(trackTitle);
+                    if (index != -1) {
+                        System.out.println("Трек найден под индексом: " + (index + 1));
+                    } else {
+                        System.out.println("Трек не найден");
+                    }
+                    break;
+                }
+                case 12: {
+                    playlist.shuffleTracks();
+                    System.out.println("Плейлист перемешан");
                     break;
                 }
                 default:
