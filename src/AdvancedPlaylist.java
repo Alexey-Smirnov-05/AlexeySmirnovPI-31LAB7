@@ -26,7 +26,7 @@ class AdvancedPlaylist extends Playlist {
 
 
     @Override
-    public void playSong() {
+    public void play() {
         if (!tracks.isEmpty()) {
             System.out.println("Играет из AdvancedPlaylist '" + name + "': " + tracks.get(currentTrack).getTitle());
         } else {
@@ -47,6 +47,10 @@ class AdvancedPlaylist extends Playlist {
     }
 
     public String getName() {
+        return name;
+    }
+
+    public String getTitle() {
         return name;
     }
 }
